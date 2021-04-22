@@ -1,0 +1,20 @@
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading_{{ info.pk }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ info.pk }}"
+        aria-expanded="false" aria-controls="collapse_{{ info.pk }}">
+        {{ info.title }} - {{ info.location.place }}
+      </button>
+    </h2>
+    <div id="collapse_{{ info.pk }}" class="accordion-collapse collapse show" aria-labelledby="heading_{{ info.pk }}"
+      data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>Location: {{ info.location.place }}</p>
+        <p>Contact: {{ info.contact }}</p>
+        <p> <a href="{{ info.link }}">Link </a> </p>
+        <p>Last Update: {{ info.last_update_on|naturaltime }}</p>
+        <p>Description: {{ info.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>

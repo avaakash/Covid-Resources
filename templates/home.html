@@ -2,82 +2,81 @@
 {% load static humanize %}
 
 {% block title %}
-    Covid Resources
+Covid Resources
 {% endblock title %}
 
 
 
 {% block content %}
-    <div class='containers'>
-        <div class='row'>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="resources-tab" data-bs-toggle="tab" data-bs-target="#resources"
-                        type="button" role="tab" aria-controls="resources" aria-selected="true">Resources</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" type="button"
-                        role="tab" aria-controls="requests" aria-selected="false">Requests</button>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="resources" role="tabpanel" aria-labelledby="resources-tab">
-                        <div class="accordion" id="resources-accordion">
-                            {% for info in resources %}
+<div class='containers'>
+    <div class='row'>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="resources-tab" data-bs-toggle="tab" data-bs-target="#resources" type="button" href="#resources" role="tab" aria-controls="resources"
+                    aria-selected="true">Resources</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="requests-tab" data-bs-toggle="tab" data-bs-target="#requests" href="#requests" role="tab"
+                    aria-controls="requests" aria-selected="false">Requests</button>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="resources" role="tabpanel" aria-labelledby="resources-tab">
+                    <div class="accordion" id="resources-accordion">
+                        {% for info in resources %}
                             <div class="accordion-item">
-                                <h4 class="accordion-header" id="{{ info.pk }}_resources">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#resourcesCollapse_{{ info.pk }}" aria-expanded="true"
-                                        aria-controls="resourcesCollapse_{{ info.pk }}">
-                                        {{ info.title }} - {{ info.location.place }}
-                                    </button>
-                                </h4>
-                                <div id="resourcesCollapse_{{ info.pk }}" class="accordion-collapse collapse show"
-                                    aria-labelledby="{{ info.pk }}_resources" data-bs-parent="#resources-accordion">
-                                    <div class="accordion-body">
-                                        <p>Location: {{ info.location.place }}</p>
-                                        <p>Contact: {{ info.contact }}</p>
-                                        <p> <a href="{{ info.link }}">Link </a> </p>
-                                        <p>Last Update: {{ info.last_update_on|naturaltime }}</p>
-                                        <p>Description: {{ info.description }}</p>
-                                    </div>
+                              <h5 class="accordion-header" id="heading_{{ info.pk }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ info.pk }}"
+                                  aria-expanded="false" aria-controls="collapse_{{ info.pk }}">
+                                  {{ info.title }} - {{ info.location.place }}
+                                </button>
+                              </h5>
+                              <div id="collapse_{{ info.pk }}" class="accordion-collapse collapse" aria-labelledby="heading_{{ info.pk }}"
+                                data-bs-parent="#resources-accordion">
+                                <div class="accordion-body">
+                                  <p><strong>Location:</strong> {{ info.location.place }}</p>
+                                  <p><strong>Contact:</strong> {{ info.contact }}</p>
+                                  <p><strong>Last Update:</strong> {{ info.last_update_on|naturaltime }}</p>
+                                  <p><strong>Description:</strong> {{ info.description }}</p>
+                                  <p> <strong><a href="{{ info.link }}">Link</a></strong></p>
                                 </div>
+                              </div>
                             </div>
-                            {% endfor %}
-                        </div>
+                        {% endfor %}
                     </div>
-                    <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="requests-tab">
-                        <div class="accordion" id="requests-accordion">
-                            {% for info in requests %}
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="{{ info.pk }}_request">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#requestCollapse" aria-expanded="true"
-                                        aria-controls="requestCollapse">
-                                        {{ info.title }} - {{ info.location.place }}
-                                    </button>
-                                </h2>
-                                <div id="requestCollapse" class="accordion-collapse collapse show"
-                                    aria-labelledby="{{ info.pk }}_request" data-bs-parent="#requests-accordion">
-                                    <div class="accordion-body">
-                                        Location: {{ info.location.place }}
-                                        Contact: {{ info.contact }}
-                                        Created on: {{ info.creation_time|naturaltime }}
-                                        Priority: {{ info.priority }}
-                                        Description: {{ info.description }}
-                                    </div>
+                </div>
+                <div class="tab-pane fade" id="requests" role="tabpanel" aria-labelledby="requests-tab">
+                    <div class="accordion" id="requests-accordion">
+                        {% for info in requests %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="{{ info.pk }}_request">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#requestCollapse" aria-expanded="true"
+                                    aria-controls="requestCollapse">
+                                    {{ info.title }} - {{ info.location.place }}
+                                </button>
+                            </h2>
+                            <div id="requestCollapse" class="accordion-collapse collapse show"
+                                aria-labelledby="{{ info.pk }}_request" data-bs-parent="#requests-accordion">
+                                <div class="accordion-body">
+                                    <p><strong>Location:</strong> {{ info.location.place }}</p>
+                                    <p><strong>Contact:</strong> {{ info.contact }}</p>
+                                    <p><strong>Created on:</strong> {{ info.creation_time|naturaltime }}</p>
+                                    <p><strong>Priority:</strong> {{ info.priority }}</p>
+                                    <p><strong>Description:</strong> {{ info.description }}</p>
                                 </div>
                             </div>
-                            {% endfor %}
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
 {% endblock content %}
