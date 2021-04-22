@@ -1,4 +1,5 @@
 asgiref==3.3.4
+dj-places==4.0.0
 Django==3.2
 django-widget-tweaks==1.4.8
 python-decouple==3.4

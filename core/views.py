@@ -24,6 +24,8 @@ def add_resource(request):
 
 def request_resource(request):
     form = AddResourceRequest(request.POST or None)
+    for field in form:
+        print(field)
     if form.is_valid():
         form.save()
         return redirect('home')

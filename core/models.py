@@ -24,7 +24,7 @@ class ResourcesPost(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     location = PlacesField()
     title = models.CharField(max_length=256, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True, max_length=1500)
     contacts = models.TextField(null=True, blank=True)
     available = models.BooleanField(default=True)
     tags = models.ManyToManyField(CategoryTags)
@@ -33,7 +33,7 @@ class ResourcesPost(models.Model):
 
 class ResourcesRequest(models.Model):
     title = models.CharField(max_length=256)
-    description = models.TextField(null=True, blank=False)
+    description = models.TextField(null=True, blank=False, max_length=1500)
     contact = models.CharField(max_length=256)
     location = PlacesField()
     resolved = models.BooleanField(default=False)
