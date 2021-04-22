@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Request a Resource
+{% endblock title %}
+
+{% block content %}
+    <h3>Request Resource<h3>
+    <form method='POST'>
+        {% csrf_token %}
+        {% include 'form.html' %}
+        <button type='submit' id='submit' class='btn btn-primary'>Submit</button>
+    </form>
+{% endblock content %}
